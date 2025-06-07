@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database files
+*.db
+*.sqlite3
+
+# Environment variables or secret configs
+.env
+*.env
+
+# Flask specific
+instance/
+.webassets-cache
+
+# Cookies or temp data
+cookies/*.json
+cookies/*.txt
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.swp
+*.swo
+
+# VS Code or IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Compiled files
+*.pyc
