@@ -1,0 +1,44 @@
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoUrl = urlParams.get("video_url");
+
+    if (!videoUrl) {
+        console.error("No video URL found.");
+        return;
+    }
+
+    try {
+        // Fetch video metadata
+        const response = await fetch("/get_video_info", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ video_url: videoUrl })
+        });
+
+        const data = await response.json();
+        console.log("Video metadata:", data);
+
+        if (!data.formats || data.formats.length === 0) {
+            console.error("No available formats.");
+            return;
+        }
+
+        // Dynamically generate download buttons
+        const buttonContainer = document.getElementById("download-buttons");
+        buttonContainer.innerHTML = ""; // Clear previous buttons if any
+
+        data.formats.forEach(format => {
+            if (!format.direct_url) return; // Skip invalid formats
+
+            const button = document.createElement("button");
+            button.classList.add("download-button");
+            button.innerText = `Download (${format.resolution || "Unknown"} - ${format.file_type})`;
+            button.onclick = () => window.location.href = format.direct_url;
+
+            buttonContainer.appendChild(button);
+        });
+
+    } catch (error) {
+        console.error("Error fetching video info:", error);
+    }
+});

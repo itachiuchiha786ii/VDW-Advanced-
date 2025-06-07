@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Page</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/stream.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+<div class="navbar-close" onclick="$('.navbar-collapse').collapse('hide')">
+    &times;
+</div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#description">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Video Player Section -->
+    <div class="video-container">
+        <video id="onlineVideo" controls>
+            <source id="videoSource" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+    </div>
+<h2 id="videoTitle" style="margin-top: 10px;"></h2>
+
+
+<div class="resolution-options" id="download-buttons">
+    <!-- All format buttons will be injected here -->
+</div>
+
+<!-- Merged Video Options -->
+<div class="resolution-options" id="merged-download-buttons">
+    <!-- Merged 720p and 1080p buttons will appear here -->
+</div>
+
+    <!-- Player Options -->
+<div class="player-options">
+    <button data-player="online"><img src="/static/online.png" alt="Online"> Play Online</button>
+    <button data-player="mx"><img src="/static/mx.png" alt="MX"> Play in MX Player</button>
+    <button data-player="vlc"><img src="/static/vlc.png" alt="VLC"> Play in VLC</button>
+    <button data-player="xplayer"><img src="/static/xplayer.png" alt="X"> Play in X Player</button>
+    <button data-player="playit"><img src="/static/playit.png" alt="PlayIt"> Play in Playit</button>
+    <button data-player="splayer"><img src="/static/splayer.png" alt="S"> Play in S Player</button>
+    <button data-player="kmplayer"><img src="/static/km.png" alt="KM"> Play in KM</button>
+</div>
+
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoUrl = urlParams.get("video_url");
+    const videoId = urlParams.get("video_id");
+
+    if (!videoUrl || !videoId) return;
+
+    const storedData = sessionStorage.getItem("videoData");
+    if (!storedData) return;
+
+    let videoData = JSON.parse(storedData);
+
+    const videoElement = document.getElementById("onlineVideo");
+    const videoSource = document.getElementById("videoSource");
+
+    const firstPlayable = videoData.formats.find(f => f.vcodec !== "none" && f.acodec !== "none");
+
+    if (firstPlayable) {
+        videoSource.src = firstPlayable.url;
+        videoElement.load();
+    }
+
+    const getLabel = (format) => {
+        if (format.vcodec !== "none" && format.acodec === "none") {
+            return `${format.height || format.resolution || format.format_note || "Video"} - ${format.ext}`;
+        } else if (format.vcodec === "none" && format.acodec !== "none") {
+            return `Audio - ${format.ext}`;
+        } else if (format.vcodec !== "none" && format.acodec !== "none") {
+            return `${format.height || format.resolution || format.format_note || "Video"} - ${format.ext}`;
+        } else {
+            return `${format.format_id || "Unknown"} - ${format.ext}`;
+        }
+    };
+
+    const setDownloadedStyle = (button) => {
+        button.style.backgroundColor = "green";
+        button.style.color = "white";
+    };
+const forceDownload = (url, filename = "download") => {
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+};
+    
+
+    const buttonContainer = document.getElementById("download-buttons");
+    buttonContainer.innerHTML = "";
+
+    videoData.formats.forEach((format) => {
+        if (!format.url) return;
+
+        const label = getLabel(format);
+        const btn = document.createElement("button");
+        btn.innerHTML = `<i class="fas fa-download"></i> Download (${label})`;
+        btn.className = "download-btn";
+
+        btn.onclick = () => {
+    // Apply green color immediately
+    btn.style.backgroundColor = "#4CAF50";
+    btn.style.color = "white";
+    btn.disabled = true;
+
+    // Let the browser render the style changes before downloading
+    setTimeout(() => {
+        const filename = `${videoId || 'video'}_${label.replace(/\s+/g, "_")}.${format.ext}`;
+        forceDownload(format.url, filename);
+    }, 50); // slight delay to ensure style update renders first
+};
+
+        buttonContainer.appendChild(btn);
+    });
+
+    // YouTube merge logic
+    const mergeContainer = document.getElementById("merged-download-buttons");
+mergeContainer.innerHTML = "";
+
+const isYouTube = (videoData.platform || "").toLowerCase().includes("youtube");
+if (isYouTube) {
+    const resolutions = ["720p", "1080p", "1440p", "2160p"];
+    resolutions.forEach((res) => {
+        const mergeBtn = document.createElement("button");
+        mergeBtn.textContent = `Download ${res}`;
+        mergeBtn.className = "download-btn";
+
+        mergeBtn.onclick = async () => {
+            mergeBtn.disabled = true;
+            let percent = 0;
+
+            const updateButton = (p) => {
+                mergeBtn.innerHTML = `
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Preparing ${res} (${p}%)`;
+            };
+
+            updateButton(percent);
+
+            const progressInterval = setInterval(() => {
+                if (percent < 90) {
+                    percent += 5;
+                    updateButton(percent);
+                }
+            }, 300);
+
+            try {
+                const mergeRes = await fetch("/merge_video", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        video_url: videoUrl,
+                        resolution: res,
+                        formats: videoData.formats
+                    })
+                });
+
+                const result = await mergeRes.json();
+                clearInterval(progressInterval);
+
+                if (result.url) {
+                    updateButton(100);
+                    const filename = result.url.split("/").pop();
+                    await forceDownload(`/merged/${filename}`, filename, mergeBtn);
+
+                    setTimeout(() => {
+                        mergeBtn.innerHTML = `<i class="fas fa-check-circle"></i> Downloaded ${res}`;
+                        mergeBtn.disabled = false;
+                    }, 500);
+                } else {
+                    mergeBtn.innerHTML = "Error";
+                    mergeBtn.disabled = false;
+                }
+            } catch (err) {
+                clearInterval(progressInterval);
+                mergeBtn.innerHTML = "Error";
+                mergeBtn.disabled = false;
+            }
+        };
+
+        mergeContainer.appendChild(mergeBtn);
+    });
+}
+
+    // External players
+    document.querySelectorAll(".player-options button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (!firstPlayable || !firstPlayable.url) return;
+
+            const videoLink = firstPlayable.url;
+            const player = btn.getAttribute("data-player");
+
+            const schemes = {
+                online: () => {
+                    videoSource.src = videoLink;
+                    videoElement.load();
+                    videoElement.play();
+                },
+                mx: () => window.location.href = `intent:${videoLink}#Intent;package=com.mxtech.videoplayer.ad;end`,
+                vlc: () => window.location.href = `vlc://${videoLink}`,
+                xplayer: () => window.location.href = `intent:${videoLink}#Intent;package=video.player.videoplayer;end`,
+                splayer: () => window.location.href = `intent:${videoLink}#Intent;package=com.smedia.video.player;end`,
+                kmplayer: () => window.location.href = `intent:${videoLink}#Intent;package=com.kmplayer;end`,
+                playit: () => window.location.href = `intent:${videoLink}#Intent;package=com.playit.videoplayer;end`
+            };
+
+            schemes[player]?.();
+        });
+    });
+
+    // Show the video title
+    const videoTitle = document.getElementById("videoTitle");
+    if (videoData.title) {
+        videoTitle.textContent = videoData.title;
+    }
+});
+</script>
+
+</body>
+</html>

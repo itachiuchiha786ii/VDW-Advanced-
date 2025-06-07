@@ -1,0 +1,493 @@
+/* Override Bootstrap navbar */
+.custom-navbar {
+  background-color: white !important;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.brand-text {
+  font-weight: 700;            /* Bold text */
+  font-family: 'Segoe UI', sans-serif; /* Change to any font you like */
+  font-size: 1.2rem;
+  margin-left:0;            /* Slight spacing from the logo */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: black !important;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.custom-navbar .navbar-brand img {
+  margin-right: 8px;
+}
+
+/* Hamburger */
+.custom-toggler {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.hamburger-icon {
+  font-size: 28px;
+  color: black;
+}
+
+/* Fullscreen mobile overlay */
+#mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobileMenuOverlay.active {
+  display: flex;
+}
+
+#mobileMenuOverlay a {
+  font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+#closeMobileMenu {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: black;
+}
+
+/* Header section */header.header {
+  min-height: 100vh; /* Fills entire viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f3e7fe 0%, #f6d1f5 35%, #d2e2ff 100%);
+  color: #222;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+
+.header-content h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.header-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Form and input styles */
+.header .form-control {
+  border-radius: 10px 0 0 10px;
+  border: none;
+  height: 50px;
+}
+
+.custom-input {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Button gradient — works on all screen sizes */
+header .container .btn.btn-primary {
+  margin-top: 10px;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(to right, #fbc2eb, #a6c1ee) !important;
+  color: #333 !important;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  display: inline-block;
+}
+
+header .container .btn.btn-primary:hover {
+  background: linear-gradient(to right, #a6c1ee, #fbc2eb) !important;
+  transform: translateY(-2px);
+  color: #000 !important;
+}
+
+/* Dynamic text under button */
+.input-group-append span {
+  display: block;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Title and subtitle enhancements */
+.fancy-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 40px;
+}
+
+.fancy-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 600px;
+  margin: 10px auto 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .custom-input,
+  .custom-btn {
+    width: 90%;
+  }
+
+  .fancy-title {
+    padding-top: 15px;
+    font-size: 2.2rem;
+  }
+
+  .fancy-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.service-icon {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.icon-wrapper {
+  background-color: #ffffffaa;
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: inline-block;
+}
+
+.icon-wrapper:hover {
+  background-color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+.icon-wrapper i {
+  font-size: 48px;
+  transition: transform 0.3s ease;
+}
+
+/* Platform Colors */
+.fa-youtube { color: #FF0000; }
+.fa-facebook-f { color: #1877F2; }
+.fa-vimeo-v { color: #1AB7EA; }
+.fa-soundcloud { color: #FF5500; }
+.fa-instagram { color: #E1306C; }
+.fa-x-twitter { color: #000000; }
+.fa-tiktok { color: #010101; }
+.fa-dailymotion { color: #0066DC; }
+.fa-headphones-alt { color: #9C27B0; } /* Generic for MP3 */
+.fa-reddit { color: #FF4500; }
+.fa-twitch { color: #9146FF; }
+.fa-pinterest { color: #E60023; }
+.fa-tumblr { color: #34526f; }
+.fa-linkedin { color: #0077B5; }
+.fa-youtube-square { color: #FF0000; }
+.fa-telegram-plane { color: #0088cc; }
+
+/* Icons without exact brands */
+.fa-play-circle { color: #FF5E3A; } /* Likee */
+.fa-video { color: #FFD700; }       /* Kwai */
+.fa-bullhorn { color: #F5A623; }    /* Rumble */
+.fa-film { color: #666666; }        /* IMDB Trailers */
+.fa-video-slash { color: #A62639; } /* Bitchute */
+.fa-users { color: #ED812B; }       /* OK.ru */
+.fa-music { color: #00BCD4; }       /* Bandcamp */
+.fa-cloud { color: #9C27B0; }       /* Mixcloud */
+
+.service-icon p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #444;
+  font-weight: 500;
+}
+/* SVG Icon Colors */
+.icon-telegram { fill: #0088cc; }     /* Telegram Blue */
+.icon-bandcamp { fill: #00BCD4; }     /* Bandcamp Cyan */
+.icon-mixcloud { fill: #9C27B0; }     /* Mixcloud Purple */
+/* Common animation */
+@keyframes bounceIn {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Animated icons */
+.icon-Youtube {
+  fill: #FF0000;
+  animation: bounceIn 0.6s ease-in-out;
+}
+
+.icon-Facebook {
+  fill: #1877F2;
+  animation: bounceIn 0.7s ease-in-out;
+}
+
+.icon-vimeo {
+  fill: #1ab7ea;
+  animation: bounceIn 0.8s ease-in-out;
+}
+
+.icon-Soundcloud {
+  fill: #ff5500;
+  animation: bounceIn 0.9s ease-in-out;
+}
+
+.icon-instagram path {
+  fill: #E4405F;
+}
+.icon-instagram {
+  animation: bounceIn 1s ease-in-out;
+}
+
+.icon-Tumblr path {
+  fill: #36465D;
+}
+.icon-Tumblr {
+  animation: bounceIn 1s ease-in-out;
+}
+
+.icon-X {
+  fill: #000000;
+  animation: bounceIn 1.1s ease-in-out;
+}
+
+.icon-Tiktok path {
+  fill: #010101;
+}
+.icon-Tiktok {
+  animation: bounceIn 1.2s ease-in-out;
+}
+
+.icon-Dailymotion path {
+  fill: #0066DC;
+}
+.icon-Dailymotion {
+  animation: bounceIn 1.3s ease-in-out;
+}
+
+.icon-MP3 path,
+.icon-MP3 text {
+  fill: #FF5722;
+}
+.icon-MP3 {
+  animation: bounceIn 1.4s ease-in-out;
+}
+
+.icon-reddit path {
+  fill: #FF4500;
+}
+.icon-reddit {
+  animation: bounceIn 1.5s ease-in-out;
+}
+
+.icon-Twitch path,
+.icon-Twitch rect {
+  fill: #6441A4;
+}
+.icon-Twitch {
+  animation: bounceIn 1.6s ease-in-out;
+}
+
+.icon-Kwai path {
+  fill: #f28c28;
+}
+.icon-Kwai {
+  animation: bounceIn 1.7s ease-in-out;
+}
+
+.icon-Rumble path {
+  fill: #59c572;
+}
+.icon-Rumble {
+  animation: bounceIn 1.8s ease-in-out;
+}
+
+.icon-Pinterest path {
+  fill: #bd081c;
+}
+.icon-Pinterest {
+  animation: bounceIn 1.9s ease-in-out;
+}
+
+.icon-IMDB path {
+  fill: #f5c518;
+}
+.icon-IMDB {
+  animation: bounceIn 2s ease-in-out;
+}
+
+.icon-Bitchute path {
+  fill: #c8102e;
+}
+.icon-Bitchute {
+  animation: bounceIn 2.1s ease-in-out;
+}
+
+.icon-OK\\.ru path {
+  fill: #ee8208;
+}
+.icon-OK\\.ru {
+  animation: bounceIn 2.2s ease-in-out;
+}
+
+.icon-Linkedin path {
+  fill: #0077B5;
+}
+.icon-Linkedin {
+  animation: bounceIn 2.3s ease-in-out;
+}
+
+.icon-Bandcamp path {
+  fill: #629aa9;
+}
+.icon-Bandcamp {
+  animation: bounceIn 2.4s ease-in-out;
+}
+/* Optional: Adjust SVG size globally if needed */
+.icon-wrapper svg {
+  width: 48px;
+  height: 48px;
+  transition: transform 0.3s ease;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px 0;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.slide {
+  flex: 0 0 33.3333%;
+  padding: 10px;
+  box-sizing: border-box;
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.slide.center-active {
+  opacity: 1;
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.card {
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #fff;
+  text-align: center;
+}
+
+.card-img-top {
+  height: 160px;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+
+@media (max-width: 768px) {
+  .slide {
+    flex: 0 0 100%;
+  }
+}
+/* Positioning the buttons outside the slide *//* General Button Styling */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.slide-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slide-btn.prev {
+  left: -20px; /* or 10px if you want it visible on small screens */
+}
+
+.slide-btn.next {
+  right: -20px;
+}
+
+@media (max-width: 768px) {
+  .slide-btn.prev {
+    left: 10px;
+  }
+
+  .slide-btn.next {
+    right: 10px;
+  }
+}
+.footer i {
+  color: #00ffd5;
+}
+
+.footer a:hover i {
+  color: #fff;
+}
+.xyz{
+  fill: #00ffd5;
+}

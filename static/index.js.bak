@@ -1,0 +1,42 @@
+$(document).ready(function() {
+    $("#downloadButton").click(function() {
+        const videoUrl = $("#videoUrl").val();
+
+        if (videoUrl === "") {
+            alert("Please enter a video URL.");
+            return;
+        }
+
+        $("#downloadButton").prop("disabled", true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Redirecting...');
+
+        $.ajax({
+            url: 'http://127.0.0.1:5000/get_video_info',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ video_url: videoUrl }),
+            dataType: 'json',
+            success: function(response) {
+                console.log("Backend response:", response);
+
+                if (response.error) {
+                    alert("Error: " + response.error);
+                } else {
+                    // Now, the backend returns a video_id, streaming_url, and download_url
+                    const videoId = response.video_id;
+                    const streamingUrl = encodeURIComponent(response.streaming_url || '');
+                    const downloadUrl = encodeURIComponent(response.download_url || '');
+                    // Pass video_id
+                    const redirectUrl = `stream.html?video_url=${videoUrl}`;
+                    window.location.href = redirectUrl; // Redirect to stream.html with video_id
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while communicating with the server.");
+            },
+            complete: function() {
+                $("#downloadButton").prop("disabled", false).html('<i class="fas fa-download"></i>');
+            }
+        });
+    });
+});
