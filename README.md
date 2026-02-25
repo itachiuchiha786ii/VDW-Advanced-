@@ -1,101 +1,159 @@
+VDW-Advanced – Multi-Platform Video Downloader
 
-# ðŸŽ¥ AI-Powered Video Downloader Website
+VDW-Advanced is a privacy-focused video downloader web application built using Flask.
+It supports downloading videos from multiple platforms, merging YouTube audio and video streams, cookie-based authenticated downloads, and includes a statistics dashboard for usage monitoring.
 
-This is a fully functional, privacy-focused video downloader platform built using **Flask**, enhanced with **AI-powered platform detection**, **YouTube video-audio merging**, **cookie support**, and a **statistics dashboard** to monitor usage trends.
+---
 
-## ðŸš€ Features
+OVERVIEW
 
-- âœ… Download videos from multiple platforms: YouTube, Facebook, Instagram, X (Twitter), and more.
-- ðŸ” AI-based platform detection for pasted URLs.
-- ðŸ”„ Backend **FFmpeg merging** for YouTube audio+video.
-- ðŸ“Š Dashboard with resolution/platform stats and visitor tracking.
-- ðŸª Custom cookie injection for authenticated downloads (e.g., private videos).
-- ðŸŽ¬ One-click playback on MX Player / VLC / KM Player (Android intent links).
-- ðŸŒ Stateless, sessionless backend for better performance and simplicity.
+This project provides a lightweight and efficient backend system for downloading and processing online video content.
+It follows a stateless backend architecture focused on performance, simplicity, and scalability.
 
-## ðŸ› ï¸ Installation
+---
 
-### 1. Clone the Repo
-```bash
+FEATURES
+
+Multi-platform video download support: 
+• YouTube
+• Facebook
+• Instagram
+• X (Twitter)
+• Other supported platforms
+
+Automatic platform detection from URL
+FFmpeg-based merging for YouTube video-only and audio-only streams
+Cookie-based authentication for restricted/private content
+Usage statistics dashboard
+Resolution analytics
+Platform usage distribution
+Visitor tracking by IP address
+Android intent support (MX Player, VLC, KM Player)
+Stateless backend design
+
+---
+
+PROJECT STRUCTURE
+
+VDW-Advanced/ │ 
+├── app.py
+├── requirements.txt
+├── readme.txt
+├── cookies/
+├── static/
+├── templates/
+└── database files
+
+---
+
+INSTALLATION
+
+1. Clone the repository:
 git clone https://github.com/itachiuchiha786ii/VDW-Advanced.git
 cd VDW-Advanced
-```
 
-### 2. Create a Virtual Environment (optional but recommended)
-```bash
+2. Create a virtual environment (recommended):
 python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-```
+source venv/bin/activate
+(On Windows: venv\Scripts\activate)
 
-### 3. Install Dependencies
-```bash
+3. Install dependencies:
 pip install -r requirements.txt
-```
 
-### 4. Install FFmpeg (Required)
-- **Linux**: `sudo apt install ffmpeg`
-- **Windows**: [Download FFmpeg](https://ffmpeg.org/download.html), and add to PATH
+4. Install FFmpeg (required):
+Linux: sudo apt install ffmpeg
+Windows: Download FFmpeg from https://ffmpeg.org/download.html
+Add FFmpeg to your system PATH.
 
-## â–¶ï¸ Running the App
+---
 
-```bash
+RUNNING THE APPLICATION
+
+Run the application using:
 python app.py
-```
 
-Visit `http://localhost:5000` or your server IP.
+Access the application in your browser:
+http://localhost:5000
 
-## ðŸ” Cookie Setup
+---
 
-For platforms like Facebook, Instagram, or X, place your cookies in:
-```
-/cookies/<platform>.cookies.json
-```
+DOCKER DEPLOYMENT
 
-Or use `.txt` cookie formats if needed:
-```
-/cookies/<platform>.txt
-```
+You can also run the application using Docker.
 
-## ðŸŽžï¸ YouTube Audio + Video Merge
+1. Build Docker image:
+docker build -t vdw-advanced .
 
-The app uses FFmpeg to merge **video-only** and **audio-only** streams for YouTube. The merged files are stored in a SQLite DB and expire after 8 hours automatically.
+2. Run container:
+docker run -d -p 5000:5000 --name vdw-app vdw-advanced
 
-## ðŸ“Š Dashboard Features
+3. Access application:
+http://localhost:5000
 
-- Merged video resolution breakdown
-- Platform usage pie chart
-- Visitor tracking (by IP)
+If using Docker Compose:
+docker-compose up -d
 
-Visit: `/dashboard` on your deployment
+---
 
-## ðŸ§  AI Features
+COOKIE CONFIGURATION
 
-- Auto-detects supported platforms from any URL
-- Friendly, readable error messages when something goes wrong
+To enable authenticated downloads:
+Place cookie files in:
+cookies/<platform>.cookies.json
+Or:
+cookies/<platform>.txt
 
-## ðŸ’» Tech Stack
+---
 
-- **Backend**: Flask (Python)
-- **Frontend**: HTML, Tailwind CSS, JavaScript
-- **Database**: SQLite
-- **Media Processing**: FFmpeg
-- **Charts**: Chart.js
+YOUTUBE STREAM MERGING
 
-## ðŸ“¡ VPS Deployment
+The application uses FFmpeg to merge separate audio and video streams.
+Merged files are temporarily stored in SQLite
+Files automatically expire after 8 hours
 
-1. Deploy on any Ubuntu VPS.
-2. Use `tmux` or `screen` to keep it running in background.
-3. Set up Nginx + Gunicorn (optional) for production.
-4. Point domain or subdomain to VPS IP.
+---
 
-## ðŸ§ª Future Plans
+DASHBOARD
 
-- Telegram bot integration
-- Auto cookie sync tool
-- Android app frontend
-- Error analytics
+The dashboard provides:
+Video resolution distribution
+Platform usage analytics
+Visitor tracking by IP
 
-## ðŸ“„ License
+Access:
+/dashboard
 
-This project is licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for details.
+---
+
+TECHNOLOGY STACK
+
+Backend: Flask (Python)
+Frontend: HTML, Tailwind CSS, JavaScript
+Database: SQLite
+Media Processing: FFmpeg
+Charts: Chart.js
+
+---
+
+VPS DEPLOYMENT
+
+1. Deploy on Ubuntu VPS
+2. Use tmux or screen to keep the app running
+3. Configure Nginx + Gunicorn for production
+4. Point your domain or subdomain to VPS IP
+
+---
+
+FUTURE ENHANCEMENTS
+
+Telegram bot integration
+Automatic cookie synchronization tool
+Android application frontend
+Advanced error analytics
+
+---
+
+LICENSE
+
+This project is licensed under the MIT License.
+See the LICENSE file for details.

@@ -37,3 +37,13 @@ Thumbs.db
 
 # Compiled files
 *.pyc
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+.env.docker
+*.tar
+*.tar.gz
+
+# Docker volumes
+docker_data/
