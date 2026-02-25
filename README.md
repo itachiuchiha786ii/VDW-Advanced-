@@ -49,19 +49,19 @@ VDW-Advanced/ │
 INSTALLATION
 
 1. Clone the repository:
-git clone https://github.com/itachiuchiha786ii/VDW-Advanced.git
-cd VDW-Advanced
+'''git clone https://github.com/itachiuchiha786ii/VDW-Advanced.git
+cd VDW-Advanced '''
 
 2. Create a virtual environment (recommended):
-python3 -m venv venv
-source venv/bin/activate
+'''python3 -m venv venv
+source venv/bin/activate'''
 (On Windows: venv\Scripts\activate)
 
-3. Install dependencies:
-pip install -r requirements.txt
+3. Install dependencies:'''
+pip install -r requirements.txt'''
 
 4. Install FFmpeg (required):
-Linux: sudo apt install ffmpeg
+Linux: '''sudo apt install ffmpeg'''
 Windows: Download FFmpeg from https://ffmpeg.org/download.html
 Add FFmpeg to your system PATH.
 
@@ -70,10 +70,10 @@ Add FFmpeg to your system PATH.
 RUNNING THE APPLICATION
 
 Run the application using:
-python app.py
+'''python app.py'''
 
 Access the application in your browser:
-http://localhost:5000
+'''http://localhost:5000'''
 
 ---
 
@@ -81,27 +81,27 @@ DOCKER DEPLOYMENT
 
 You can also run the application using Docker.
 
-1. Build Docker image:
-docker build -t vdw-advanced .
+1. Build Docker image:'''
+docker build -t vdw-advanced .'''
 
-2. Run container:
-docker run -d -p 5000:5000 --name vdw-app vdw-advanced
+2. Run container:'''
+docker run -d -p 5000:5000 --name vdw-app vdw-advanced'''
 
-3. Access application:
-http://localhost:5000
+3. Access application:'''
+http://localhost:5000'''
 
 If using Docker Compose:
-docker-compose up -d
+'''docker-compose up -d'''
 
 ---
 
 COOKIE CONFIGURATION
 
 To enable authenticated downloads:
-Place cookie files in:
+Place cookie files in:'''
 cookies/<platform>.cookies.json
 Or:
-cookies/<platform>.txt
+cookies/<platform>.txt '''
 
 ---
 
